@@ -1,0 +1,47 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing:border-box;
+    /* outline: 1px solid tomato; */
+}
+
+body{
+    background-color: #14213d;
+    padding: 40px;
+}
+
+.main-container{
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    /* flex-direction: row; */
+}
+
+.lista-todo{
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    border: 1px solid white;
+    border-radius: 20px;
+    padding: 10px;
+}
+
+.create-todo{
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid white;
+}
+
+.create-todo > button{
+    width: 70px;
+    height: 20px;
+}
+
+.todo{
+    margin: 20px 0 0 10px;
+}
+
+/* .create-todo{
+    d
+} */
