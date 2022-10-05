@@ -20,10 +20,10 @@ function agregarToDo() {
     }))
 
     const ultimaPosicionArray = toDoArray[toDoArray.length-1]
-    let tareaDiv = document.createElement('div')
-    tareaDiv.innerHTML = ultimaPosicionArray.descripcion
+    let tareaDiv = (document.createElement('div'))
+    let divClass = tareaDiv.setAttribute("class", "todo")
+    tareaDiv.innerText = ultimaPosicionArray.descripcion
     toDoContainer.appendChild(tareaDiv)
-    console.log(toDoArray);
 }
 
 añadirBoton.addEventListener('click', agregarToDo)
