@@ -65,8 +65,11 @@ function agregarToDo() {
 
 
         let colorEtiqueta = document.createElement('div')
+        // let nombreEtiqueta = document.createElement('img')
         colorEtiqueta.setAttribute("class", "color-circulo")
         colorEtiqueta.setAttribute("style", `background-color : ${ultimaPosicionArray.etiqueta.color};`)
+        // nombreEtiqueta.setAttribute("alt", ultimaPosicionArray.etiqueta.nombre )
+        // colorEtiqueta.append(nombreEtiqueta)
 
 
         let descToDo = document.createElement('p')

@@ -7,7 +7,7 @@
 
 body{
     background-color: #14213d;
-    padding: 40px;
+    margin: 40px;
     color: white;
     display: flex;
     flex-direction: column;
@@ -39,16 +39,61 @@ h1{
     grid-area: lista;
 }
 
-.create-todo{
-    width: 500px;
+.create-todo, .create-etiqueta{
+    max-width: 500px;
     display: flex;
     flex-direction: column;
     border: 1px solid white;
+    padding: 20px;
+    border-radius: 20px;
+    gap: 20px;
 }
 
-.create-todo > button{
+.create-todo h2, .create-etiqueta h2{
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+}
+
+.create-todo h2 img, .create-etiqueta h2 img {
+    height: 80%;
+    color: white;
+    margin-right: 10px;
+}
+
+
+
+
+.create-todo > button, .create-etiqueta > button{
     width: 70px;
-    height: 20px;
+    height: 30px;
+    border-radius: 5px;
+    border: none;
+    align-self: center;
+}
+
+#inputToDO, #inputEtiqueta{
+    width: 200px;
+    padding: 5px;
+    border-radius: 5px;
+    border: none;
+}
+
+.select-etiqueta{
+    width: 40px;
+    height: 100%;
+    border-radius: 5px;
+    border: none;
+
+}
+
+#inputColorEtiqueta{
+    width: 30%;
+}
+
+.create-etiqueta div{
+    display: flex;
+    gap: 20px;
 }
 
 .todo{
@@ -57,14 +102,14 @@ h1{
     /* justify-content: space-evenly; */
 }
 
-/* .todo > span{ */
-    /* text-overflow:clip; */
-    /* overflow: hidden; */
-    /* white-space: wrap; */
-    /* display: flex; */
-/* } */
+
+.todo > p {
+    border-left: 1px solid red;
+    padding: 0 10px;
+}
 .select-etiqueta{
-    width: 150px;
+    width: 100px;
+    text-align: center;
 }
 
 .select-etiqueta > option > span{
