@@ -9,10 +9,13 @@ let añadirBoton = $('#añadirBoton')
 let EtiquetasContainer = $('.select-etiqueta')
 let añadirEtiqueta = $('#añadirEtiqueta')
 
-
 function ToDoDisponibles() {//Contador de ToDo 
     let toDoDisponibles = $('.contador-todo')
     toDoDisponibles.innerText = `Tienes ${toDoArray.length} ToDos`
+    if (toDoArray.length != 0 ){
+        let felicitaciones = $('.congrats')
+        felicitaciones.classList.add('invisible')
+    }
 }
 
 let toDoArray = [] //aca estaran los ToDo para hacer
@@ -23,7 +26,7 @@ let EtiquetasArray = [] //aca estaran los ToDo para hacer
 
 EtiquetasArray.push(new Etiqueta({
     nombre: 'Tareas',
-    color: '#ffffff'
+    color: '#ffb703'
 }))
 
 let etiquetaDivDefault = document.createElement('option')
@@ -39,7 +42,6 @@ function agregarToDo() {
     if (inputToDo.value == "") {
 
        //NO HACE NADA
-
 
     }else{
 
@@ -65,21 +67,13 @@ function agregarToDo() {
 
 
         let colorEtiqueta = document.createElement('div')
-        // let nombreEtiqueta = document.createElement('img')
         colorEtiqueta.setAttribute("class", "color-circulo")
         colorEtiqueta.setAttribute("style", `background-color : ${ultimaPosicionArray.etiqueta.color};`)
-        // nombreEtiqueta.setAttribute("alt", ultimaPosicionArray.etiqueta.nombre )
-        // colorEtiqueta.append(nombreEtiqueta)
-
-
         let descToDo = document.createElement('p')
         descToDo.innerText = ultimaPosicionArray.descripcion
-
         tareaDiv.append(colorEtiqueta, descToDo)
-
         toDoContainer.appendChild(tareaDiv)
         inputToDo.value = "" 
-
         ToDoDisponibles()
     }
 }
@@ -115,7 +109,7 @@ function etiquetasExistentes() {
     
     let etiquetasCreadasDiv = $('.etiquetas-existentes')
     etiquetasCreadasDiv.innerText = ""
-    console.log(EtiquetasArray, etiquetasCreadasDiv);
+    // console.log(EtiquetasArray, etiquetasCreadasDiv);
     for (const iterator of EtiquetasArray) {
         let divEtiqueta = document.createElement('div')
         let circuloColor = document.createElement('div')
@@ -134,3 +128,4 @@ etiquetasExistentes()
 añadirBoton.addEventListener('click', agregarToDo)
 añadirEtiqueta.addEventListener('click', agregarEtiqueta)
 
+ToDoDisponibles()
