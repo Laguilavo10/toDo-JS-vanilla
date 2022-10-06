@@ -106,10 +106,30 @@ function agregarEtiqueta() {
         EtiquetasContainer.append(etiquetaDiv)
         inputEtiqueta.value = ""
 
+        etiquetasExistentes()
+
     }
 }
 
+function etiquetasExistentes() {
+    
+    let etiquetasCreadasDiv = $('.etiquetas-existentes')
+    etiquetasCreadasDiv.innerText = ""
+    console.log(EtiquetasArray, etiquetasCreadasDiv);
+    for (const iterator of EtiquetasArray) {
+        let divEtiqueta = document.createElement('div')
+        let circuloColor = document.createElement('div')
+        let infoEtiqueta = document.createElement('p')
+        divEtiqueta.setAttribute('class', "etiqueta-div")
+        circuloColor.setAttribute('class', 'color-circulo')
+        circuloColor.setAttribute('style', `background-color : ${iterator.color};`)
+        infoEtiqueta.innerText = iterator.nombre
+        divEtiqueta.append(circuloColor, infoEtiqueta)
+        etiquetasCreadasDiv.append(divEtiqueta)
+    }   
+}
 
+etiquetasExistentes()
 
 añadirBoton.addEventListener('click', agregarToDo)
 añadirEtiqueta.addEventListener('click', agregarEtiqueta)

@@ -7,7 +7,7 @@
 
 body{
     background-color: #14213d;
-    margin: 40px;
+    margin: 20px;
     color: white;
     display: flex;
     flex-direction: column;
@@ -51,12 +51,11 @@ h1{
 
 .create-todo h2, .create-etiqueta h2{
     display: flex;
-    /* justify-content: center; */
     align-items: center;
 }
 
 .create-todo h2 img, .create-etiqueta h2 img {
-    height: 80%;
+    height: 70%;
     color: white;
     margin-right: 10px;
 }
@@ -91,7 +90,7 @@ h1{
     width: 30%;
 }
 
-.create-etiqueta div{
+.create-etiqueta > div{
     display: flex;
     gap: 20px;
 }
@@ -125,6 +124,22 @@ h1{
     max-width: 18px;
     border-radius: 50px;
     margin:  0 10px;
+}
+
+.etiquetas-creadas{
+    display: flex;
+    flex-direction: column;
+}
+
+.etiquetas-existentes{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 25px;
+}
+
+.etiqueta-div{
+    display: flex;
 }
 
 @media (width <  850px) {
