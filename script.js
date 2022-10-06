@@ -10,6 +10,10 @@ let EtiquetasContainer = $('.select-etiqueta')
 let añadirEtiqueta = $('#añadirEtiqueta')
 
 
+function ToDoDisponibles() {//Contador de ToDo 
+    let toDoDisponibles = $('.contador-todo')
+    toDoDisponibles.innerText = `Tienes ${toDoArray.length} ToDos`
+}
 
 let toDoArray = [] //aca estaran los ToDo para hacer
 let EtiquetasArray = [] //aca estaran los ToDo para hacer
@@ -65,13 +69,15 @@ function agregarToDo() {
         colorEtiqueta.setAttribute("style", `background-color : ${ultimaPosicionArray.etiqueta.color};`)
 
 
-        let descToDo = document.createElement('span')
+        let descToDo = document.createElement('p')
         descToDo.innerText = ultimaPosicionArray.descripcion
 
         tareaDiv.append(colorEtiqueta, descToDo)
 
         toDoContainer.appendChild(tareaDiv)
         inputToDo.value = "" 
+
+        ToDoDisponibles()
     }
 }
 
