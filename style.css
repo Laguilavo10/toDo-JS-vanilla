@@ -11,8 +11,11 @@ body{
 }
 
 .main-container{
-    display: flex;
+    display: grid;
     justify-content: center;
+    grid-template-areas: 
+        "lista tarea"
+        "lista etiqueta";
     gap: 20px;
     /* flex-direction: row; */
 }
@@ -20,10 +23,12 @@ body{
 .lista-todo{
     display: flex;
     flex-direction: column;
-    width: 500px;
+    /* width: 500px; */
+    
     border: 1px solid white;
     border-radius: 20px;
     padding: 10px;
+    grid-area: lista;
 }
 
 .create-todo{
@@ -39,7 +44,9 @@ body{
 }
 
 .todo{
-    margin: 20px 0 0 10px;
+    margin: 20px 10px;
+    display: flex;
+    /* justify-content: space-evenly; */
 }
 
 .select-etiqueta{
@@ -52,8 +59,9 @@ body{
     background-color: aqua;
 }
 
-.colorCirculo{
-    width: 20px; 
-    height: 20px;
-    color: antiquewhite;
+.color-circulo{
+    width: 18px; 
+    height: 18px;
+    border-radius: 50px;
+    margin-right: 10px;
 }
