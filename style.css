@@ -42,6 +42,18 @@ body{
     margin: 20px 0 0 10px;
 }
 
-/* .create-todo{
-    d
-} */
+.select-etiqueta{
+    width: 150px;
+}
+
+.select-etiqueta > option > span{
+    width: 20px;
+    height: 20px;
+    background-color: aqua;
+}
+
+.colorCirculo{
+    width: 20px; 
+    height: 20px;
+    color: antiquewhite;
+}

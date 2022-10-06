@@ -14,26 +14,22 @@
 
         <div class="lista-todo">
             <div class="contador-todo">Tienes 5 TODOs por hacer</div>
-            <div class="todo">
-                hacer la comida
-            </div>
-            <div class="todo">
-                hacer la comida
-            </div>
-            <div class="todo">
-                hacer la comida
-            </div>
-            <div class="todo">
-                hacer la comida
-            </div>
-            <div class="todo">
-                hacer la comida
-            </div>
         </div>
 
         <div class="create-todo">
-            <input type="text" placeholder="Ingrese su Tarea" id="inputToDO">
-            <button id="añadirBoton">Añadir</button>
+            <div>
+                <input type="text" placeholder="Ingrese su Tarea" id="inputToDO">
+                <select class="select-etiqueta">
+                    <option value="Tareas">Tareas</option>
+                  </select>
+                <button id="añadirBoton">Añadir</button>
+            </div>
+        </div>
+
+        <div>
+            <input type="text" id="inputEtiqueta">
+            <input type="color" name="" id="inputColorEtiqueta">
+            <button id="añadirEtiqueta">Crear Etiqueta</button>
         </div>
     </div>
     <script src="./script.js" type="module"></script>
