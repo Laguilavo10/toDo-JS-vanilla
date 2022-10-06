@@ -1,15 +1,17 @@
+const $ = (etiqueta) => document.querySelector(etiqueta)
+
 import Etiqueta from "./class/Etiqueta.js";
 import ToDo from "./class/ToDo.js";
 
-
-const $ = (etiqueta) => document.querySelector(etiqueta)
 
 let toDoContainer = $('.tareas')
 let añadirBoton = $('#añadirBoton')
 let EtiquetasContainer = $('.select-etiqueta')
 let añadirEtiqueta = $('#añadirEtiqueta')
+
 let toDoLocalStrorage = localStorage.getItem('toDo')
 let toDoArray = []
+let EtiquetasArray = []
 
 if (toDoLocalStrorage == null ) {
     toDoArray = []
@@ -17,35 +19,29 @@ if (toDoLocalStrorage == null ) {
     toDoArray = JSON.parse(toDoLocalStrorage)
 }
 
+//Funciones que se hacen al cargar la pagina
+
+EtiquetaDefault()
+ToDoDisponibles()
+renderTareas()
+etiquetasExistentes()
 
 
-let EtiquetasArray = []
+//Eventos
+
+añadirBoton.addEventListener('click', agregarToDo)
+añadirEtiqueta.addEventListener('click', agregarEtiqueta)
 
 
- // Etiqueta Tareas por Defecto
+//Funciones
 
-EtiquetasArray.push(new Etiqueta({
-    nombre: 'Tareas',
-    color: '#ffb703'
-}))
-
-
-
-let etiquetaDivDefault = document.createElement('option')
-etiquetaDivDefault.setAttribute('value', EtiquetasArray[0].nombre)
-etiquetaDivDefault.innerText = EtiquetasArray[0].nombre
-EtiquetasContainer.append(etiquetaDivDefault)
-inputEtiqueta.value = ""
-// let toDoLocalStorage = JSON.parse(localStorage.getItem('toDo'))
-
-
-function agregarToDo() {
+function agregarToDo() {                //Agrega las nueva Tarea dentro del Array de tareas para que luego se renderize
     let inputToDo = $('#inputToDO')
-
-    if (inputToDo.value == "") {// SI EL INPUT ESTA VACIO NO HACE NADA  
-
+    
+    if (inputToDo.value == "") {
+        // SI EL INPUT ESTA VACIO NO HACE NADA  
     }else{
-
+        
         let etiquetaSeleccionada = $('.select-etiqueta')
         let indexEtiquetaSeleccionada = EtiquetasArray.findIndex((a)=>a.nombre == etiquetaSeleccionada.value)
     
@@ -53,48 +49,46 @@ function agregarToDo() {
             descripcion: inputToDo.value,
             etiqueta: EtiquetasArray[indexEtiquetaSeleccionada]
         }))
-
+        
         localStorage.setItem('toDo', JSON.stringify(toDoArray))
-
-        console.log(toDoArray);
-
+        
+        
         ToDoDisponibles()
         renderTareas()
     }
 }
 
-function agregarEtiqueta() {
+function agregarEtiqueta() {            //Agrega la neuva Etiqueta dentro del Array de etiquetas para que luego se renderize 
     
     let inputEtiqueta = $('#inputEtiqueta')
     if (inputEtiqueta.value == "") {
-
+        
         //NO HACE NADA
-
+        
     }else{
-
+        
         let inputColorEtiqueta = $('#inputColorEtiqueta')
         EtiquetasArray.push(new Etiqueta({
             nombre: inputEtiqueta.value,
             color: inputColorEtiqueta.value,
         }))
-
+        
         const ultimaPosicionArray = EtiquetasArray[EtiquetasArray.length-1]
         let etiquetaDiv = document.createElement('option')
         etiquetaDiv.setAttribute('value', ultimaPosicionArray.nombre)
         etiquetaDiv.innerText = ultimaPosicionArray.nombre
         EtiquetasContainer.append(etiquetaDiv)
         inputEtiqueta.value = ""
-
+        
         etiquetasExistentes()
-
+        
     }
 }
 
-function etiquetasExistentes() {
+function etiquetasExistentes() {        //Renderiza las EWtiquetas que existen
     
     let etiquetasCreadasDiv = $('.etiquetas-existentes')
     etiquetasCreadasDiv.innerText = ""
-    // console.log(EtiquetasArray, etiquetasCreadasDiv);
     for (const iterator of EtiquetasArray) {
         let divEtiqueta = document.createElement('div')
         let circuloColor = document.createElement('div')
@@ -108,31 +102,9 @@ function etiquetasExistentes() {
     }   
 }
 
-// function guardarLocalStorage(lista, nombre) {
-//     localStorage.setItem(nombre, JSON.stringify(lista))
-// }
-
-ToDoDisponibles()
-renderTareas()
-etiquetasExistentes()
-
-añadirBoton.addEventListener('click', agregarToDo)
-añadirEtiqueta.addEventListener('click', agregarEtiqueta)
-
-
-// agregarToDo()
-
-
-
-function renderTareas(valueInput) {
+function renderTareas(valueInput) {     //Muestra las tareas guardadas en el localStorage 
     toDoContainer.innerText = ""
     let inputToDo = $('#inputToDO')
-
-
-    
-    
-
-    // console.log(toDoLocalStorage);
 
     for (const iterator of toDoArray) {
         
@@ -151,10 +123,7 @@ function renderTareas(valueInput) {
     }
 }
 
-
-// localStorage.setItem('toDo', JSON.stringify(toDoArray))
-
-function ToDoDisponibles() {//Contador de ToDo 
+function ToDoDisponibles() {            //Muestra en la parte superior cuantas tareas hay por realizar 
     let toDoDisponibles = $('.contador-todo')
     toDoDisponibles.innerText = `Tienes ${toDoArray.length} ToDos`
 
@@ -162,4 +131,16 @@ function ToDoDisponibles() {//Contador de ToDo
         let felicitaciones = $('.congrats')
         felicitaciones.classList.add('invisible')
     }
+}
+
+function EtiquetaDefault(params) {      //me crea la instancia de la etiqueta Tareas que viene por Defecto
+    EtiquetasArray.push(new Etiqueta({
+        nombre: 'Tareas',
+        color: '#ffb703'
+    }))
+    let etiquetaDivDefault = document.createElement('option')
+    etiquetaDivDefault.setAttribute('value', EtiquetasArray[0].nombre)
+    etiquetaDivDefault.innerText = EtiquetasArray[0].nombre
+    EtiquetasContainer.append(etiquetaDivDefault)
+    inputEtiqueta.value = "" 
 }
