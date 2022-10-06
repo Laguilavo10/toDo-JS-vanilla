@@ -4,22 +4,22 @@ import ToDo from "./class/ToDo.js";
 
 const $ = (etiqueta) => document.querySelector(etiqueta)
 
-let toDoContainer = $('.lista-todo')
+let toDoContainer = $('.tareas')
 let añadirBoton = $('#añadirBoton')
 let EtiquetasContainer = $('.select-etiqueta')
 let añadirEtiqueta = $('#añadirEtiqueta')
+let toDoLocalStrorage = localStorage.getItem('toDo')
+let toDoArray = []
 
-function ToDoDisponibles() {//Contador de ToDo 
-    let toDoDisponibles = $('.contador-todo')
-    toDoDisponibles.innerText = `Tienes ${toDoArray.length} ToDos`
-    if (toDoArray.length != 0 ){
-        let felicitaciones = $('.congrats')
-        felicitaciones.classList.add('invisible')
-    }
+if (toDoLocalStrorage == null ) {
+    toDoArray = []
+}else{
+    toDoArray = JSON.parse(toDoLocalStrorage)
 }
 
-let toDoArray = [] //aca estaran los ToDo para hacer
-let EtiquetasArray = [] //aca estaran los ToDo para hacer
+
+
+let EtiquetasArray = []
 
 
  // Etiqueta Tareas por Defecto
@@ -29,52 +29,37 @@ EtiquetasArray.push(new Etiqueta({
     color: '#ffb703'
 }))
 
+
+
 let etiquetaDivDefault = document.createElement('option')
 etiquetaDivDefault.setAttribute('value', EtiquetasArray[0].nombre)
 etiquetaDivDefault.innerText = EtiquetasArray[0].nombre
 EtiquetasContainer.append(etiquetaDivDefault)
 inputEtiqueta.value = ""
+// let toDoLocalStorage = JSON.parse(localStorage.getItem('toDo'))
 
 
 function agregarToDo() {
     let inputToDo = $('#inputToDO')
 
-    if (inputToDo.value == "") {
-
-       //NO HACE NADA
+    if (inputToDo.value == "") {// SI EL INPUT ESTA VACIO NO HACE NADA  
 
     }else{
 
         let etiquetaSeleccionada = $('.select-etiqueta')
-
-        let nose = EtiquetasArray.findIndex((a)=>a.nombre == etiquetaSeleccionada.value)
-
-
-        //agrega la nueva tarea al array 
+        let indexEtiquetaSeleccionada = EtiquetasArray.findIndex((a)=>a.nombre == etiquetaSeleccionada.value)
+    
         toDoArray.push(new ToDo({
             descripcion: inputToDo.value,
-            etiqueta: EtiquetasArray[nose]
+            etiqueta: EtiquetasArray[indexEtiquetaSeleccionada]
         }))
+
+        localStorage.setItem('toDo', JSON.stringify(toDoArray))
 
         console.log(toDoArray);
 
-        //crea el div, le introduce la info y la pega en el HTML
-        const ultimaPosicionArray = toDoArray[toDoArray.length-1]
-
-        
-        let tareaDiv = document.createElement('div')
-        tareaDiv.setAttribute("class", "todo")
-
-
-        let colorEtiqueta = document.createElement('div')
-        colorEtiqueta.setAttribute("class", "color-circulo")
-        colorEtiqueta.setAttribute("style", `background-color : ${ultimaPosicionArray.etiqueta.color};`)
-        let descToDo = document.createElement('p')
-        descToDo.innerText = ultimaPosicionArray.descripcion
-        tareaDiv.append(colorEtiqueta, descToDo)
-        toDoContainer.appendChild(tareaDiv)
-        inputToDo.value = "" 
         ToDoDisponibles()
+        renderTareas()
     }
 }
 
@@ -123,9 +108,58 @@ function etiquetasExistentes() {
     }   
 }
 
+// function guardarLocalStorage(lista, nombre) {
+//     localStorage.setItem(nombre, JSON.stringify(lista))
+// }
+
+ToDoDisponibles()
+renderTareas()
 etiquetasExistentes()
 
 añadirBoton.addEventListener('click', agregarToDo)
 añadirEtiqueta.addEventListener('click', agregarEtiqueta)
 
-ToDoDisponibles()
+
+// agregarToDo()
+
+
+
+function renderTareas(valueInput) {
+    toDoContainer.innerText = ""
+    let inputToDo = $('#inputToDO')
+
+
+    
+    
+
+    // console.log(toDoLocalStorage);
+
+    for (const iterator of toDoArray) {
+        
+        let tareaDiv = document.createElement('div')
+        tareaDiv.setAttribute("class", "todo")
+
+        let colorEtiqueta = document.createElement('div')
+        colorEtiqueta.setAttribute("class", "color-circulo")
+        colorEtiqueta.setAttribute("style", `background-color : ${iterator.etiqueta.color};`)
+        let descToDo = document.createElement('p')
+        descToDo.innerText = iterator.descripcion
+        tareaDiv.append(colorEtiqueta, descToDo)
+        toDoContainer.appendChild(tareaDiv)
+        inputToDo.value = "" 
+        ToDoDisponibles()
+    }
+}
+
+
+// localStorage.setItem('toDo', JSON.stringify(toDoArray))
+
+function ToDoDisponibles() {//Contador de ToDo 
+    let toDoDisponibles = $('.contador-todo')
+    toDoDisponibles.innerText = `Tienes ${toDoArray.length} ToDos`
+
+    if (toDoArray.length != 0 ){
+        let felicitaciones = $('.congrats')
+        felicitaciones.classList.add('invisible')
+    }
+}
